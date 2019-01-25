@@ -1,0 +1,28 @@
+{
+  "name": "transformers",
+  "version": "1.0.0",
+  "description": "Utility functions to calculate transformation matrix",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vecta-io/transformers.git"
+  },
+  "keywords": [
+    "transformations",
+    "matrix",
+    "translate",
+    "shear",
+    "scale",
+    "rotate",
+    "skew"
+  ],
+  "author": "neel singh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vecta-io/transformers/issues"
+  },
+  "homepage": "https://github.com/vecta-io/transformers#readme"
+}
