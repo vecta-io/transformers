@@ -1,0 +1,50 @@
+# transformers
+Lightweight zero-dependency transformation matrix utilities
+
+## Why
+Perform transformation matrix calculation in a 2D plane. Use this library to:
+- create a transformation matrix and manipulate it via **translation**, **rotation**, **scale**, **shear**, **skew** 
+- Parse a transformation in string format
+- Obtain a point after applying transformation
+
+## Install
+```
+npm install transformers
+```
+
+## Usage
+
+Initialize a matrix
+
+```javascript
+var transformers = require('transformers');
+
+var mat = transformers();
+
+mat.matrix; // { a: 1, b: 0, c: 0, d: 1, e: 0, f: 0 }
+```
+Parse transformation in string
+
+```javascript
+var transformers = require('transformers');
+
+var mat = transformers('translate(10, 15)');
+//OR
+var mat = transformers().translate(10, 15);
+
+mat.matrix; //{ a: 1, b: 0, c: 0, d: 1, e: 10, f: 15 }
+```
+
+Obtain a point after applying transformations
+
+```javascript
+var transformers = require('transformers');
+
+var mat = transformers('translate(10, 15)');
+
+mat.pointTo(8, 5); // { x: 18, y: 20 }
+```
+
+## API
+
+{{>main}}

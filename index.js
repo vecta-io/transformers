@@ -1,10 +1,29 @@
 var DEF = { a: 1, b: 0, c: 0, d: 1, e: 0, f: 0 };
 
-function Transformers () {
+/**
+ * Initializer to create a matrix instance
+ * @param input
+ * @namespace transformers
+ */
+function Transformers (input) {
     this.matrix = Object.assign({}, DEF);
+
+    switch (typeof input) {
+        case 'string': this.parse(input); break;
+        case 'object':
+            if (Array.isArray(input)) { input = array2Matrix(input); }
+            this.multiply(input);
+            break;
+    }
 }
 
 Transformers.prototype = {
+    /**
+     * Perform matrix multiplication
+     * @param {object|array|transformers} matrix matrix to be multiplied
+     * @memberOf transformers
+     * @returns {transformers}
+     */
     multiply: function (mat) {
         var matrix = Object.assign({}, DEF);
 
@@ -21,11 +40,13 @@ Transformers.prototype = {
         this.matrix = matrix;
 
         return this;
-
-        function array2Matrix(arr) {
-            return { a: arr[0], b: arr[1], c: arr[2], d: arr[3], e: arr[4], f: arr[5] }
-        }
     },
+    /**
+     * Parse a valid string containing various transformations
+     * @param {string} str
+     * @memberOf transformers
+     * @returns {transformers}
+     */
     parse: function (str) {
         var matrix,
             regex = /([translate|rotate|scale|shear|skew|matrix]+)\((.*?)\)/g,
@@ -51,11 +72,26 @@ Transformers.prototype = {
 
         return this;
     },
+    /**
+     * Perform translation
+     * @param {number} x translation along x-axis
+     * @param {number} [y=0] translation along y-axis
+     * @memberOf transformers
+     * @returns {transformers}
+     */
     translate: function (x = 0, y = 0) {
         var mat = { a: 1, b: 0, c: 0, d: 1, e: x, f: y };
 
         return this.multiply(mat);
     },
+    /**
+     * Perform rotation
+     * @param {number} angle angle in radian format
+     * @param {number} [x] rotation along a point in x-axis
+     * @param {number} [y] rotation along a point in y-axis
+     * @memberOf transformers
+     * @returns {transformers}
+     */
     rotate: function (angle, x, y) {
         var cosAngle = Math.cos(angle),
             sinAngle = Math.sin(angle),
@@ -72,6 +108,13 @@ Transformers.prototype = {
 
         return this;
     },
+    /**
+     * Perform scaling
+     * @param {number} x scaling along x-axis
+     * @param {number} [y=x] scaling along y-axis
+     * @memberOf transformers
+     * @returns {transformers}
+     */
     scale: function (x, y) {
         var mat;
 
@@ -81,16 +124,35 @@ Transformers.prototype = {
 
         return this.multiply(mat);
     },
+    /**
+     * Perform shear
+     * @param {number} x shear along x-axis
+     * @param {number} y shear along y-axis
+     * @memberOf transformers
+     * @returns {transformers}
+     */
     shear: function (x, y) {
         var mat = { a: 1, b: y, c: x, d: 1, e: 0, f: 0 };
         
         return this.multiply(mat);
     },
+    /**
+     * Perform skew
+     * @param {number} x skew along x-axis
+     * @param {number} y skew along y-axis
+     * @memberOf transformers
+     * @returns {transformers}
+     */
     skew: function (x, y) {
         var mat = { a: 1, b: Math.tan(y), c: Math.tan(x), d: 1, e: 0, f: 0 };
 
         return this.multiply(mat);
     },
+    /**
+     * Inverse current matrix
+     * @memberOf transformers
+     * @returns {transformers}
+     */
     inverse: function () {
         var {a, b, c, d, e, f} = this.matrix,
             den = a * d - b * c,
@@ -105,15 +167,24 @@ Transformers.prototype = {
 
         return this.multiply(den);
     },
-    pointTo: function (x, y) {
+    /**
+     * Obtain a point after applying transformation
+     * @param {number} [x=0]
+     * @param {number} [y=0]
+     * @memberOf transformers
+     * @returns {{x: number, y: number}}
+     */
+    pointTo: function (x = 0, y = 0) {
         var mat = this.matrix;
 
-        return { x: mat.a * x + mat.c * y + e, y: mat.b * x + mat.d * y + f };
+        return { x: mat.a * x + mat.c * y + mat.e, y: mat.b * x + mat.d * y + mat.f };
     }
 }
 
-module.exports = {
-    create: function () {
-        return new Transformers();
-    }
+function array2Matrix(arr) {
+    return { a: arr[0], b: arr[1], c: arr[2], d: arr[3], e: arr[4], f: arr[5] }
+}
+
+module.exports = function () {
+    return new Transformers(...arguments);
 }
