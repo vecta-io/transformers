@@ -23,14 +23,7 @@ Transformers.prototype = {
         return this;
 
         function array2Matrix(arr) {
-            return {
-                a: arr[0],
-                b: arr[1],
-                c: arr[2],
-                d: arr[3],
-                e: arr[4],
-                f: arr[5]
-            }
+            return { a: arr[0], b: arr[1], c: arr[2], d: arr[3], e: arr[4], f: arr[5] }
         }
     },
     parse: function (str) {
@@ -59,28 +52,14 @@ Transformers.prototype = {
         return this;
     },
     translate: function (x = 0, y = 0) {
-        var mat = {
-            a: 1,
-            b: 0,
-            c: 0,
-            d: 1,
-            e: x,
-            f: y
-        };
+        var mat = { a: 1, b: 0, c: 0, d: 1, e: x, f: y };
 
         return this.multiply(mat);
     },
     rotate: function (angle, x, y) {
         var cosAngle = Math.cos(angle),
             sinAngle = Math.sin(angle),
-            mat = {
-                a: cosAngle,
-                b: sinAngle,
-                c: -sinAngle,
-                d: cosAngle,
-                e: 0,
-                f: 0
-            };
+            mat = { a: cosAngle, b: sinAngle, c: -sinAngle, d: cosAngle, e: 0, f: 0 };
 
         if (x === undefined || y === undefined) {
             this.multiply(mat);
@@ -98,38 +77,17 @@ Transformers.prototype = {
 
         if (y === undefined) { y = x; }
 
-        mat = {
-            a: x,
-            b: 0,
-            c: 0,
-            d: y,
-            e: 0,
-            f: 0
-        };
+        mat = { a: x, b: 0, c: 0, d: y, e: 0, f: 0 };
 
         return this.multiply(mat);
     },
     shear: function (x, y) {
-        var mat = {
-            a: 1,
-            b: y,
-            c: x,
-            d: 1,
-            e: 0,
-            f: 0
-        }
+        var mat = { a: 1, b: y, c: x, d: 1, e: 0, f: 0 };
         
         return this.multiply(mat);
     },
     skew: function (x, y) {
-        var mat = {
-            a: 1,
-            b: Math.tan(y),
-            c: Math.tan(x),
-            d: 1,
-            e: 0,
-            f: 0
-        }
+        var mat = { a: 1, b: Math.tan(y), c: Math.tan(x), d: 1, e: 0, f: 0 };
 
         return this.multiply(mat);
     },
@@ -150,10 +108,7 @@ Transformers.prototype = {
     pointTo: function (x, y) {
         var mat = this.matrix;
 
-        return {
-            a: mat.a * x + mat.c * y + e,
-            b: mat.b * x + mat.d * y + f
-        };
+        return { x: mat.a * x + mat.c * y + e, y: mat.b * x + mat.d * y + f };
     }
 }
 
