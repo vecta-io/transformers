@@ -19,7 +19,8 @@
     "shear",
     "scale",
     "rotate",
-    "skew"
+    "skew",
+    "inverse"
   ],
   "author": "neel singh",
   "license": "ISC",

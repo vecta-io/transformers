@@ -183,6 +183,16 @@ Transformers.prototype = {
         var mat = this.matrix;
 
         return { x: mat.a * x + mat.c * y + mat.e, y: mat.b * x + mat.d * y + mat.f };
+    },
+    /**
+     * Converts current matrix to string format to be used in CSS or SVG
+     * @memberOf transformers
+     * @returns {string}
+     */
+    render: function () {
+        var mat = this.matrix;
+
+        return 'matrix(' + Object.values(mat).join(',') + ')';
     }
 }
 

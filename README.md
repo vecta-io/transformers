@@ -69,6 +69,7 @@ Initializer to create a matrix instance
     * [.skew(x, y)](#transformers.skew) ⇒ [<code>transformers</code>](#transformers)
     * [.inverse()](#transformers.inverse) ⇒ [<code>transformers</code>](#transformers)
     * [.pointTo([x], [y])](#transformers.pointTo) ⇒ <code>Object</code>
+    * [.render()](#transformers.render) ⇒ <code>string</code>
 
 <a name="transformers.multiply"></a>
 
@@ -113,7 +114,7 @@ Perform rotation
 
 | Param | Type | Description |
 | --- | --- | --- |
-| angle | <code>number</code> | angle in angle format |
+| angle | <code>number</code> | angle in degree |
 | [x] | <code>number</code> | rotation along a point in x-axis |
 | [y] | <code>number</code> | rotation along a point in y-axis |
 
@@ -171,3 +172,9 @@ Obtain a point after applying transformation
 | [x] | <code>number</code> | <code>0</code> | 
 | [y] | <code>number</code> | <code>0</code> | 
 
+<a name="transformers.render"></a>
+
+### transformers.render() ⇒ <code>string</code>
+Converts current matrix to string format to be used in CSS or SVG
+
+**Kind**: static method of [<code>transformers</code>](#transformers)  
