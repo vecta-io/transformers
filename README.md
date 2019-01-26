@@ -4,7 +4,7 @@ Lightweight zero-dependency transformation matrix utilities
 ## Why
 Perform transformation matrix calculation in a 2D plane. Use this library to:
 - create a transformation matrix and manipulate it via **translation**, **rotation**, **scale**, **shear**, **skew** 
-- Parse a transformation in string format
+- Parse a transformation in string format, `translate(10 20) rotate(30)`
 - Obtain a point after applying transformation
 
 ## Install
@@ -54,9 +54,9 @@ Initializer to create a matrix instance
 
 **Kind**: global namespace  
 
-| Param |
-| --- |
-| input | 
+| Param | Type | Description |
+| --- | --- | --- |
+| [input] | <code>string</code> \| <code>object</code> \| <code>array</code> | Can be a transformation in string, object, array notation |
 
 
 * [transformers](#transformers) : <code>object</code>
@@ -113,7 +113,7 @@ Perform rotation
 
 | Param | Type | Description |
 | --- | --- | --- |
-| angle | <code>number</code> | angle in radian format |
+| angle | <code>number</code> | angle in angle format |
 | [x] | <code>number</code> | rotation along a point in x-axis |
 | [y] | <code>number</code> | rotation along a point in y-axis |
 
