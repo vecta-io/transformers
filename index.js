@@ -2,7 +2,7 @@ var DEF = { a: 1, b: 0, c: 0, d: 1, e: 0, f: 0 };
 
 /**
  * Initializer to create a matrix instance
- * @param input
+ * @param {string|object|array} [input] Can be a transformation in string, object, array notation
  * @namespace transformers
  */
 function Transformers (input) {
@@ -86,16 +86,21 @@ Transformers.prototype = {
     },
     /**
      * Perform rotation
-     * @param {number} angle angle in radian format
+     * @param {number} angle angle in degree
      * @param {number} [x] rotation along a point in x-axis
      * @param {number} [y] rotation along a point in y-axis
      * @memberOf transformers
      * @returns {transformers}
      */
-    rotate: function (angle, x, y) {
-        var cosAngle = Math.cos(angle),
-            sinAngle = Math.sin(angle),
-            mat = { a: cosAngle, b: sinAngle, c: -sinAngle, d: cosAngle, e: 0, f: 0 };
+    rotate: function (angle, x=0, y=0) {
+        var cosAngle,
+            sinAngle,
+            mat;
+
+        angle = angle * Math.PI / 180;
+        cosAngle = Math.cos(angle);
+        sinAngle = Math.sin(angle);
+        mat = { a: cosAngle, b: sinAngle, c: -sinAngle, d: cosAngle, e: 0, f: 0 };
 
         if (x === undefined || y === undefined) {
             this.multiply(mat);
