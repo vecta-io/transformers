@@ -1,7 +1,11 @@
 {
-  "name": "transformers",
-  "version": "1.0.0",
+  "name": "transformersjs",
+  "version": "1.0.2",
   "description": "Utility functions to calculate transformation matrix",
+  "files": [
+    "*.md",
+    "index.js"
+  ],
   "main": "index.js",
   "scripts": {
     "test": "jest",
@@ -23,7 +27,7 @@
     "inverse"
   ],
   "author": "neel singh",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/vecta-io/transformers/issues"
   },

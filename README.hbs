@@ -45,6 +45,16 @@ var mat = transformers('translate(10, 15)');
 mat.pointTo(8, 5); // { x: 18, y: 20 }
 ```
 
+Convert matrix to string to be used in CSS or SVG
+
+```javascript
+var transformers = require('transformers');
+
+var mat = transformers('translate(10, 15)');
+
+mat.render(); // matrix(1,0,0,1,10,15)
+```
+
 ## API
 
 {{>main}}
