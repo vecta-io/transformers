@@ -1,9 +1,10 @@
 # transformers
 Lightweight zero-dependency transformation matrix utilities
+[npm](https://www.npmjs.com/package/transformersjs)
 
 ## Why
 Perform transformation matrix calculation in a 2D plane. Use this library to:
-- create a transformation matrix and manipulate it via **translation**, **rotation**, **scale**, **shear**, **skew** 
+- Create a transformation matrix and manipulate it via **translation**, **rotation**, **scale**, **shear**, **skew**
 - Parse a transformation in string format, `translate(10 20) rotate(30)`
 - Obtain a point after applying transformation
 - Obtain matrix in string format to be used in CSS or SVG
