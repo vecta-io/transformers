@@ -170,7 +170,7 @@ Transformers.prototype = {
                 f: (b * e - a * f) / den
             };
 
-        return this.multiply(den);
+        return this.multiply(mat);
     },
     /**
      * Obtain a point after applying transformation
