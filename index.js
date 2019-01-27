@@ -160,17 +160,18 @@ Transformers.prototype = {
      */
     inverse: function () {
         var {a, b, c, d, e, f} = this.matrix,
-            den = a * d - b * c,
-            mat = {
-                a: d / den,
-                b: b / den,
-                c: c / den,
-                d: a / den,
-                e: (d * e - c * f) / -den,
-                f: (b * e - a * f) / den
-            };
+            den = a * d - b * c;
 
-        return this.multiply(mat);
+        this.matrix = {
+            a: d / den,
+            b: b / den,
+            c: c / den,
+            d: a / den,
+            e: (d * e - c * f) / -den,
+            f: (b * e - a * f) / den
+        };
+
+        return this;
     },
     /**
      * Obtain a point after applying transformation
