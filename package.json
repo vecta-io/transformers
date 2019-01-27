@@ -1,6 +1,6 @@
 {
   "name": "transformersjs",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "description": "Utility functions to calculate transformation matrix",
   "files": [
     "*.md",
