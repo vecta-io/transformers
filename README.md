@@ -1,6 +1,7 @@
 # transformers
 Lightweight zero-dependency transformation matrix utilities
-[npm](https://www.npmjs.com/package/transformersjs)
+
+[![NPM](https://nodei.co/npm/transformersjs.png)](https://nodei.co/npm/transformersjs/)
 
 ## Why
 Perform transformation matrix calculation in a 2D plane. Use this library to:
@@ -30,9 +31,9 @@ Parse transformation in string
 ```javascript
 var transformers = require('transformers');
 
-var mat = transformers('translate(10, 15)');
+var mat = transformers('translate(10, 15) rotate(30)');
 //OR
-var mat = transformers().translate(10, 15);
+var mat = transformers().translate(10, 15).rotate(30);
 
 mat.matrix; //{ a: 1, b: 0, c: 0, d: 1, e: 10, f: 15 }
 ```
