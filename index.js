@@ -1,6 +1,17 @@
 var DEF = { a: 1, b: 0, c: 0, d: 1, e: 0, f: 0 };
 
 /**
+ * Matrix formation
+ * @typedef {object} Matrix
+ * @property {number} a=1
+ * @property {number} b=0
+ * @property {number} c=0
+ * @property {number} d=1
+ * @property {number} e=0
+ * @property {number} f=0
+ */
+
+/**
  * Initializer to create a matrix instance
  * @param {string|object|array} [input] Can be a transformation in string, object, array notation
  * @namespace transformers
@@ -20,9 +31,16 @@ function Transformers (input) {
 Transformers.prototype = {
     /**
      * Perform matrix multiplication
-     * @param {object|array|transformers} matrix matrix to be multiplied
+     * @param {array|Matrix|Transformers} matrix matrix to be multiplied
      * @memberOf transformers
      * @returns {transformers}
+     * @example
+     * var transformers = require('transformersjs');
+     * var mat = transformers();
+     *
+     * mat.multiply({ a: 1, b: 0, c: 0, d: 1, e: 0, f: 0 });
+     * mat.multiply([1, 0, 0, 1, 0, 0]);
+     * mat.multiply(mat); // { a: 1, b: 0, c: 0, d: 1, e: 0, f: 0 }
      */
     multiply: function (mat) {
         var matrix = Object.assign({}, DEF);
@@ -46,6 +64,11 @@ Transformers.prototype = {
      * @param {string} str
      * @memberOf transformers
      * @returns {transformers}
+     * @example
+     * var transformers = require('transformersjs');
+     * var mat = transformers();
+     *
+     * mat.parse('translate(10,10)'); // {a: 1, b: 0, c: 0, d: 1, e: 10, f: 10}
      */
     parse: function (str) {
         var matrix,
@@ -74,10 +97,16 @@ Transformers.prototype = {
     },
     /**
      * Perform translation
-     * @param {number} x translation along x-axis
+     * @param {number} [x=0] translation along x-axis
      * @param {number} [y=0] translation along y-axis
      * @memberOf transformers
      * @returns {transformers}
+     * @example
+     * var transformers = require('transformersjs');
+     * var mat = transformers('translate(10, 10)');
+     *
+     * mat.translate(); // {a: 1, b: 0, c: 0, d: 1, e: 10, f: 10}
+     * mat.translate(5, 5); // {a: 1, b: 0, c: 0, d: 1, e: 15, f: 15}
      */
     translate: function (x = 0, y = 0) {
         var mat = { a: 1, b: 0, c: 0, d: 1, e: x, f: y };
@@ -119,6 +148,12 @@ Transformers.prototype = {
      * @param {number} [y=x] scaling along y-axis
      * @memberOf transformers
      * @returns {transformers}
+     * @example
+     * var transformers = require('transformersjs');
+     * var mat = transformers('translate(10, 10)');
+     *
+     * mat.scale(5); // {a: 5, b: 0, c: 0, d: 5, e: 10, f: 10}
+     * mat.scale(5, 2); // {a: 5, b: 0, c: 0, d: 2, e: 10, f: 10}
      */
     scale: function (x, y) {
         var mat;
@@ -135,6 +170,11 @@ Transformers.prototype = {
      * @param {number} y shear along y-axis
      * @memberOf transformers
      * @returns {transformers}
+     * @example
+     * var transformers = require('transformersjs');
+     * var mat = transformers();
+     *
+     * mat.shear(5,5); // {a: 1, b: 5, c: 5, d: 1, e: 0, f: 0}
      */
     shear: function (x, y) {
         var mat = { a: 1, b: y, c: x, d: 1, e: 0, f: 0 };
@@ -147,6 +187,11 @@ Transformers.prototype = {
      * @param {number} y skew along y-axis
      * @memberOf transformers
      * @returns {transformers}
+     * @example
+     * var transformers = require('transformersjs');
+     * var mat = transformers();
+     *
+     * mat.skew(5,5); // {a: 1, b: -3.3805, c: -3.3805, d: 1, e: 0, f: 0}
      */
     skew: function (x, y) {
         var mat = { a: 1, b: Math.tan(y), c: Math.tan(x), d: 1, e: 0, f: 0 };
@@ -157,6 +202,11 @@ Transformers.prototype = {
      * Inverse current matrix
      * @memberOf transformers
      * @returns {transformers}
+     * @example
+     * var transformers = require('transformersjs');
+     * var mat = transformers('translate(10, 10)');
+     *
+     * mat.inverse(); // {a: 1, b: 0, c: 0, d: 1, e: -10, f: -10}
      */
     inverse: function () {
         var {a, b, c, d, e, f} = this.matrix,
@@ -179,6 +229,12 @@ Transformers.prototype = {
      * @param {number} [y=0]
      * @memberOf transformers
      * @returns {{x: number, y: number}}
+     * @example
+     * var transformers = require('transformersjs');
+     * var mat = transformers('translate(10,10)');
+     *
+     * mat.pointTo(); // {x: 10, y: 10}
+     * mat.pointTo(10); // {x: 20, y: 10}
      */
     pointTo: function (x = 0, y = 0) {
         var mat = this.matrix;
@@ -189,6 +245,11 @@ Transformers.prototype = {
      * Converts current matrix to string format to be used in CSS or SVG
      * @memberOf transformers
      * @returns {string}
+     * @example
+     * var transformers = require('transformersjs');
+     * var mat = transformers('translate(10,10)');
+     *
+     * mat.render(); // "matrix(1,0,0,1,10,10)"
      */
     render: function () {
         var mat = this.matrix;
