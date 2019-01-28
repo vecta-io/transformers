@@ -164,8 +164,8 @@ Transformers.prototype = {
 
         this.matrix = {
             a: d / den,
-            b: b / den,
-            c: c / den,
+            b: b / -den,
+            c: c / -den,
             d: a / den,
             e: (d * e - c * f) / -den,
             f: (b * e - a * f) / den
