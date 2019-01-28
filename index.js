@@ -71,8 +71,7 @@ Transformers.prototype = {
      * mat.parse('translate(10,10)'); // {a: 1, b: 0, c: 0, d: 1, e: 10, f: 10}
      */
     parse: function (str) {
-        var matrix,
-            regex = /([translate|rotate|scale|shear|skew|matrix]+)\((.*?)\)/g,
+        var regex = /((?:translate|rotate|scale|shear|skew|matrix)+)\((.*?)\)/g,
             match,
             tran,
             vals = [];
@@ -80,7 +79,7 @@ Transformers.prototype = {
         if (typeof str === 'string') {
             while (match = regex.exec(str)) {
                 tran = match[1];
-                vals = (match[2] || '').match(/-?\d*(\.\d+)?(e-?\d+)?/g).map(parseFloat).filter(str => !isNaN(str) );
+                vals = (match[2] || '').match(/-?(?:\d+\.?\d*|\d*\.+\d+)(?:e-?\d+)?/g).map(parseFloat).filter(str => !isNaN(str) );
 
                 switch (tran) {
                     case 'translate': this.translate(vals[0], vals[1]); break;
