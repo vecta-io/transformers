@@ -1,7 +1,7 @@
 # transformers
 Lightweight zero-dependency transformation matrix utilities
 
-[![NPM](https://nodei.co/npm/transformersjs.png)](https://nodei.co/npm/transformersjs/)
+[![NPM](https://nodei.co/npm/transformersjs.png?downloads=true)](https://nodei.co/npm/transformersjs/)
 
 ## Why
 Perform transformation matrix calculation in a 2D plane. Use this library to:
